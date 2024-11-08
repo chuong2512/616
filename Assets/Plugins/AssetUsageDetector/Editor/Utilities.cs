@@ -230,14 +230,14 @@ namespace AssetUsageDetectorNamespace
 				if( prefabAssetType == PrefabAssetType.Regular || prefabAssetType == PrefabAssetType.Variant )
 				{
 					string assetPath = AssetDatabase.GetAssetPath( objTR.gameObject );
-					var openPrefabStage = UnityEditor.Experimental.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
+					var openPrefabStage = UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
 
 					// Try to open the prefab stage of pinged prefabs if they are double clicked
 					if( previousPingedPrefabInstanceId == objTR.GetInstanceID() && EditorApplication.timeSinceStartup - previousPingedPrefabPingTime <= 0.3f &&
 						( openPrefabStage == null || !openPrefabStage.stageHandle.IsValid() || assetPath != openPrefabStage.prefabAssetPath ) )
 					{
 						AssetDatabase.OpenAsset( objTR.gameObject );
-						openPrefabStage = UnityEditor.Experimental.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
+						openPrefabStage = UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
 					}
 
 					previousPingedPrefabInstanceId = objTR.GetInstanceID();
@@ -415,7 +415,7 @@ namespace AssetUsageDetectorNamespace
 		// Check if all open scenes are saved (not dirty)
 		public static bool AreScenesSaved()
 		{
-			for( int i = 0; i < EditorSceneManager.loadedSceneCount; i++ )
+			for( int i = 0; i < SceneManager.loadedSceneCount; i++ )
 			{
 				Scene scene = EditorSceneManager.GetSceneAt( i );
 				if( scene.isDirty || string.IsNullOrEmpty( scene.path ) )

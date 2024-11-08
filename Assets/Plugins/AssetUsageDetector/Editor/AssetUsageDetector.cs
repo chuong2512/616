@@ -161,7 +161,7 @@ namespace AssetUsageDetectorNamespace
 		private bool isInPlayMode;
 
 #if UNITY_2018_3_OR_NEWER
-		private UnityEditor.Experimental.SceneManagement.PrefabStage openPrefabStage;
+		private UnityEditor.SceneManagement.PrefabStage openPrefabStage;
 		private GameObject openPrefabStagePrefabAsset;
 #endif
 
@@ -204,7 +204,7 @@ namespace AssetUsageDetectorNamespace
 #if UNITY_2018_3_OR_NEWER
 			openPrefabStagePrefabAsset = null;
 			string openPrefabStageAssetPath = null;
-			openPrefabStage = UnityEditor.Experimental.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
+			openPrefabStage = UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
 			if( openPrefabStage != null )
 			{
 				if( !openPrefabStage.stageHandle.IsValid() )
@@ -395,7 +395,7 @@ namespace AssetUsageDetectorNamespace
 					if( ( searchParameters.searchInScenes & SceneSearchMode.OpenScenes ) == SceneSearchMode.OpenScenes )
 					{
 						// Get all open (and loaded) scenes
-						for( int i = 0; i < EditorSceneManager.loadedSceneCount; i++ )
+						for( int i = 0; i < SceneManager.loadedSceneCount; i++ )
 						{
 							Scene scene = EditorSceneManager.GetSceneAt( i );
 							if( scene.IsValid() )
@@ -420,7 +420,7 @@ namespace AssetUsageDetectorNamespace
 				if( isInPlayMode )
 				{
 					HashSet<string> openScenes = new HashSet<string>();
-					for( int i = 0; i < EditorSceneManager.loadedSceneCount; i++ )
+					for( int i = 0; i < SceneManager.loadedSceneCount; i++ )
 					{
 						Scene scene = EditorSceneManager.GetSceneAt( i );
 						if( scene.IsValid() )
